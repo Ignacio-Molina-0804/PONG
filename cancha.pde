@@ -1,7 +1,9 @@
-void bordes(int x, int y, int x2, int y2, int tamx, int tamy){
- fill(255);rect(x,y,tamx,tamy);
- fill(255);rect(x2,y2,tamx,tamy);
+void dibujarBorde(int x, int y, int ancho, int alto) {
+  fill(255);
+  rect(x, y, ancho, alto);
 }
-void cancha(int x, int y, int tamx, int tamy){
- fill(255);rect(x,y,tamx,tamy);
+
+void dibujarZonaCancha(int x, int y, int ancho, int alto) {
+  fill(255);
+  rect(x, y, ancho, alto);
 }
