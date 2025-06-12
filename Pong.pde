@@ -5,6 +5,10 @@ int p1 = 0, p2 = 0;
 int h1 = 1, h2 = 1;
 int ip = 0;
 
+// Banderas para flechas
+boolean upPressed = false;
+boolean downPressed = false;
+
 void pong() {
   background(0);
 
@@ -25,9 +29,6 @@ void pong() {
   textSize(50);
   text(p1, 350, 70);
   text(p2, 420, 70);
-
-  // Iniciar movimiento
-  if (keyPressed && (key == 's' || key == 'S' || key == 'w' || key == 'W' || keyCode == DOWN || keyCode == UP)) ip = 1;
 
   if (ip == 1) {
     x -= vx;
@@ -67,6 +68,7 @@ void reiniciarPunto(int jugador) {
 }
 
 void moverPaletas() {
+  // Jugador 1 (WASD)
   if (keyPressed) {
     if (key == 's' || key == 'S') yb1 += 5;
     if (key == 'w' || key == 'W') yb1 -= 5;
@@ -75,12 +77,25 @@ void moverPaletas() {
       h1 = 2;
     }
   }
-  if (keyCode == DOWN) yb2 += 5;
-  if (keyCode == UP) yb2 -= 5;
-  if (keyCode == RIGHT && h2 == 1) {
-    vx = 6;
-    h2 = 2;
+  // Jugador 2 (Flechas)
+  if (downPressed) yb2 += 5;
+  if (upPressed) yb2 -= 5;
+}
+
+void keyPressed() {
+  // Iniciar movimiento SOLO con Enter
+  if (keyCode == ENTER && ip == 0) {
+    ip = 1;
   }
+  // Flechas
+  if (keyCode == UP) upPressed = true;
+  if (keyCode == DOWN) downPressed = true;
+}
+
+void keyReleased() {
+  // Flechas
+  if (keyCode == UP) upPressed = false;
+  if (keyCode == DOWN) downPressed = false;
 }
 
 void limitarPaletas() {
